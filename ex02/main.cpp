@@ -1,6 +1,7 @@
 #include <iostream>
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 void printStatus(ClapTrap &clap) {
     std::cout << "ClapTrap " << clap.getName() << " - "
@@ -10,52 +11,25 @@ void printStatus(ClapTrap &clap) {
 }
 
 int main() {
-    ClapTrap clap1("Clappy");
-    ScavTrap clap2("Trapster");
+ std::cout << "---- Test de construction ----" << std::endl;
+    FragTrap frag1("Fraggy");
+    std::cout << std::endl;
 
-    std::cout << "\n--- Début du combat ---\n" << std::endl;
-    
-    printStatus(clap1);
-    printStatus(clap2);
+    printStatus(frag1);
 
-    clap1.attack("Trapster");
-    clap2.takeDamage(5);
-    std::cout << "Après attaque de Clappy: " << std::endl;
-    printStatus(clap1);
-    printStatus(clap2);
+    std::cout << "---- Test de highFivesGuys ----" << std::endl;
+    frag1.highFivesGuys();
+    std::cout << std::endl;
 
-    clap2.beRepaired(3);
-    std::cout << "Après réparation de Trapster: " << std::endl;
-    printStatus(clap2);
+    std::cout << "---- Test de la construction par copie ----" << std::endl;
+    FragTrap frag2(frag1);
+    std::cout << std::endl;
 
-    clap1.attack("Trapster");
-    clap2.takeDamage(4);
-    std::cout << "Après deuxième attaque de Clappy: " << std::endl;
-    printStatus(clap1);
-    printStatus(clap2);
+    std::cout << "---- Test de l'opérateur d'affectation ----" << std::endl;
+    FragTrap frag3("Fraggy2");
+    frag3 = frag1;
+    std::cout << std::endl;
 
-    clap2.attack("Clappy");
-    clap1.takeDamage(2);
-    std::cout << "Après attaque de Trapster: " << std::endl;
-    printStatus(clap1);
-    printStatus(clap2);
-
-    for (int i = 0; i < 8; ++i) {
-        clap1.attack("Trapster");
-    }
-    std::cout << "Après avoir épuisé l'énergie de Clappy: " << std::endl;
-    printStatus(clap1);
-    printStatus(clap2);
-
-    clap1.beRepaired(5);
-    std::cout << "Après tentative de réparation de Clappy (énergie épuisée): " << std::endl;
-    printStatus(clap1);
-
-    clap2.guardGate();
-    std::cout << "Après activation de GuardGate: " << std::endl;
-    printStatus(clap2);
-
-    std::cout << "\n--- Fin du combat ---\n" << std::endl;
-
+    std::cout << "---- Test de la destruction ----" << std::endl;
     return 0;
 }
